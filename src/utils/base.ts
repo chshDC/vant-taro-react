@@ -8,10 +8,10 @@ export const inBrowser = typeof window !== 'undefined';
 
 // PropTypes
 // export const unknownProp = (null as unknown) as PropType<unknown>;
-export const truthProp = {
-  type: Boolean,
-  default: true as const,
-};
+// export const truthProp = {
+//   type: Boolean,
+//   default: true as const,
+// };
 
 // eslint-disable-next-line
 // export type ComponentInstance = ComponentPublicInstance<{}, any>;
