@@ -1,6 +1,7 @@
 # **Vant Taro React**
 
 Vant UI的复制版，让其在Taro React中能正常工作。理论上taro支持的小程序都可以运行。
+目前还在更新中，支持列表见下文。
 
 ## Install
 
