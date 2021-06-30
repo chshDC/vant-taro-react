@@ -9,12 +9,8 @@ The cell is a single display item in the list.
 Register component globally via `app.use`, refer to [Component Registration](#/en-US/advanced-usage#zu-jian-zhu-ce) for more registration ways.
 
 ```js
-import { createApp } from 'vue';
-import { Cell, CellGroup } from 'vant';
-
-const app = createApp();
-app.use(Cell);
-app.use(CellGroup);
+import '../../components/vant-taro-react/src/index.css';
+import {CellGroup, Cell} from '../../components/vant-taro-react/src'
 ```
 
 ## Usage
@@ -22,116 +18,84 @@ app.use(CellGroup);
 ### Basic Usage
 
 ```html
-<van-cell-group>
-  <van-cell title="Cell title" value="Content" />
-  <van-cell title="Cell title" value="Content" label="Description" />
-</van-cell-group>
+<CellGroup inset>
+	<Cell title="Cell title" value="Content" />
+	<Cell title="Cell title" value="Content" label="Description" />
+</CellGroup>
 ```
 
 ### Inset Grouped
 
 ```html
-<van-cell-group inset>
-  <van-cell title="Cell title" value="Content" />
-  <van-cell title="Cell title" value="Content" label="Description" />
-</van-cell-group>
+<CellGroup inset>
+  <Cell title="Cell title" value="Content" />
+  <Cell title="Cell title" value="Content" label="Description" />
+</CellGroup>
 ```
 
 ### Size
 
 ```html
-<van-cell-group>
-  <van-cell title="Cell title" value="Content" size="large" />
-  <van-cell
+<CellGroup>
+  <Cell title="Cell title" value="Content" size="large" />
+  <Cell
     title="Cell title"
     value="Content"
     size="large"
     label="Description"
   />
-</van-cell-group>
+</CellGroup>
 ```
 
 ### Left Icon
 
 ```html
-<van-cell-group>
-  <van-cell title="Cell title" icon="location-o" />
-</van-cell-group>
+<CellGroup>
+  <Cell title="Cell title" icon="location-o" />
+</CellGroup>
 ```
 
 ### Value only
 
 ```html
-<van-cell-group>
-  <van-cell value="Content" />
-</van-cell-group>
+<CellGroup>
+  <Cell value="Content" />
+</CellGroup>
 ```
 
 ### Link
 
 ```html
-<van-cell-group>
-  <van-cell title="Cell title" is-link />
-  <van-cell title="Cell title" is-link value="Content" />
-  <van-cell title="Cell title" is-link arrow-direction="down" value="Content" />
-</van-cell-group>
+<CellGroup>
+  <Cell title="Cell title" isLink />
+  <Cell title="Cell title" isLink value="Content" />
+  <Cell title="Cell title" isLink arrowDirection="down" value="Content" />
+</CellGroup>
 ```
 
 ### Router
 
 ```html
-<van-cell-group>
-  <van-cell title="URL" is-link url="/vant/mobile.html" />
-  <van-cell title="Vue Router" is-link to="index" />
-</van-cell-group>
+<CellGroup>
+  <Cell title="Vue Router" isLink to="index" />
+</CellGroup>
 ```
 
 ### Group Title
 
 ```html
-<van-cell-group title="Group 1">
-  <van-cell title="Cell title" value="Content" />
-</van-cell-group>
-<van-cell-group title="Group 2">
-  <van-cell title="Cell title" value="Content" />
-</van-cell-group>
-```
-
-### Use Slots
-
-```html
-<van-cell value="Content" is-link>
-  <!-- Use the title slot to customize the title -->
-  <template #title>
-    <span class="custom-title">Title</span>
-    <van-tag type="danger">Tag</van-tag>
-  </template>
-</van-cell>
-
-<van-cell title="Title" icon="shop-o">
-  <!-- Use the right-icon slot to customize the right icon -->
-  <template #right-icon>
-    <van-icon name="search" class="search-icon" />
-  </template>
-</van-cell>
-
-<style>
-  .custom-title {
-    margin-right: 4px;
-    vertical-align: middle;
-  }
-
-  .search-icon {
-    font-size: 16px;
-    line-height: inherit;
-  }
-</style>
+<CellGroup title="Group 1">
+  <Cell title="Cell title" value="Content" />
+</CellGroup>
+<CellGroup title="Group 2">
+  <Cell title="Cell title" value="Content" />
+</CellGroup>
 ```
 
 ### Vertical Center
 
 ```html
-<van-cell center title="Cell title" value="Content" label="Description" />
+<Cell center title="Cell title" value="Content" label="Description" />
 ```
 
 ## API
@@ -141,7 +105,7 @@ app.use(CellGroup);
 | Attribute      | Description                  | Type      | Default |
 | -------------- | ---------------------------- | --------- | ------- |
 | title          | Group title                  | _string_  | -       |
-| inset `v3.1.0` | Whether to be inset grouped  | _boolean_ | `false` |
+| inset 		 | Whether to be inset grouped  | _boolean_ | `false` |
 | border         | Whether to show outer border | _boolean_ | `true`  |
 
 ### Cell Props
@@ -153,44 +117,25 @@ app.use(CellGroup);
 | label | Description below the title | _string_ | - |
 | size | Size，can be set to `large` | _string_ | - |
 | icon | Left Icon | _string_ | - |
-| icon-prefix | Icon className prefix | _string_ | `van-icon` |
+| iconPrefix | Icon className prefix | _string_ | `van-icon` |
 | border | Whether to show inner border | _boolean_ | `true` |
 | center | Whether to center content vertically | _boolean_ | `true` |
-| url | Link URL | _string_ | - |
 | to | Target route of the link, same as to of vue-router | _string \| object_ | - |
 | replace | If true, the navigation will not leave a history record | _boolean_ | `false` |
 | clickable | Whether to show click feedback when clicked | _boolean_ | `null` |
-| is-link | Whether to show link icon | _boolean_ | `false` |
+| isLink | Whether to show link icon | _boolean_ | `false` |
 | required | Whether to show required mark | _boolean_ | `false` |
-| arrow-direction | Can be set to `left` `up` `down` | _string_ | `right` |
-| title-style | Title style | _string \| Array \| object_ | - |
-| title-class | Title className | _string \| Array \| object_ | - |
-| value-class | Value className | _string \| Array \| object_ | - |
-| label-class | Label className | _string \| Array \| object_ | - |
+| arrowDirection | Can be set to `left` `up` `down` | _string_ | `right` |
+| titleStyle | Title style | _string \| Array \| object_ | - |
+| titleClass | Title className | _string \| Array \| object_ | - |
+| valueClass | Value className | _string \| Array \| object_ | - |
+| labelClass | Label className | _string \| Array \| object_ | - |
 
 ### Cell Events
 
 | Event | Description                  | Arguments           |
 | ----- | ---------------------------- | ------------------- |
 | click | Emitted when cell is clicked | _event: MouseEvent_ |
-
-### CellGroup Slots
-
-| Name    | Description  |
-| ------- | ------------ |
-| default | Default slot |
-| title   | Custom title |
-
-### Cell Slots
-
-| Name           | Description                       |
-| -------------- | --------------------------------- |
-| title          | Custom title                      |
-| value `v3.1.1` | Custom value                      |
-| label          | Custom label                      |
-| icon           | Custom left icon                  |
-| right-icon     | Custom right icon                 |
-| extra          | Custom extra content on the right |
 
 ### CSS Variables
 
