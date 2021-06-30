@@ -46,5 +46,6 @@ export function pick<T, U extends keyof T>(
 }
 
 export function isReactElement(element: any): element is ReactElement {
+    if (element === undefined) return false;
     return !!(element as ReactElement).type;
 }

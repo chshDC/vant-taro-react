@@ -7,8 +7,8 @@ import Button from './button';
 // import Calendar from './calendar';
 // import Card from './card';
 // import Cascader from './cascader';
-// import Cell from './cell';
-// import CellGroup from './cell-group';
+import Cell from './cell';
+import CellGroup from './cell-group';
 // import Checkbox from './checkbox';
 // import CheckboxGroup from './checkbox-group';
 // import Circle from './circle';
@@ -104,8 +104,8 @@ var version = '2.12.22';
 //     install(window.Vue);
 // }
 
-export {version, Loading, Badge, Icon, Button};
+export {version, Loading, Badge, Icon, Button, Cell, CellGroup};
 // export { install, version, ActionSheet, AddressEdit, AddressList, Area, Badge, Button, Calendar, Card, Cascader, Cell, CellGroup, Checkbox, CheckboxGroup, Circle, Col, Collapse, CollapseItem, ContactCard, ContactEdit, ContactList, CountDown, Coupon, CouponCell, CouponList, DatetimePicker, Dialog, Divider, DropdownItem, DropdownMenu, Empty, Field, Form, GoodsAction, GoodsActionButton, GoodsActionIcon, Grid, GridItem, Icon, Image, ImagePreview, IndexAnchor, IndexBar, Info, Lazyload, List, Loading, Locale, NavBar, NoticeBar, Notify, NumberKeyboard, Overlay, Pagination, Panel, PasswordInput, Picker, Popover, Popup, Progress, PullRefresh, Radio, RadioGroup, Rate, Row, Search, ShareSheet, Sidebar, SidebarItem, Skeleton, Sku, Slider, Step, Stepper, Steps, Sticky, SubmitBar, Swipe, SwipeCell, SwipeItem, Switch, SwitchCell, Tab, Tabbar, TabbarItem, Tabs, Tag, Toast, TreeSelect, Uploader };
 export default {
-    version: version
+	version: version
 };

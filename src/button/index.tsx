@@ -2,7 +2,6 @@ import React, {CSSProperties, FC, ReactElement} from "react";
 // Utils
 import {createNamespace, extend, isReactElement} from '../utils';
 import {BORDER_SURROUND} from '../utils/constant';
-import {useRoute, routeProps} from '../composables/use-route';
 
 // Components
 import {Icon} from '../icon';
