@@ -61,11 +61,12 @@ const Button: FC<ButtonProps> = (props) => {
             return renderLoadingIcon();
         }
 
-        if (props.icon !== undefined && isReactElement(props.loading)) {
-            return <View className={`${bem('icon')}`}>{props.icon}</View>
-        }
-
         if (props.icon) {
+
+            if (isReactElement(props.icon)) {
+                return <View className={`${bem('icon')}`}>{props.icon}</View>
+            }
+
             return (
                 <Icon
                     name={props.icon as string}
@@ -124,11 +125,9 @@ const Button: FC<ButtonProps> = (props) => {
 
     const {type, size, block, round, plain, square, loading, disabled, hairline, iconPosition} = props;
 
-    // console.log("================");
-    // console.log({plain, block, round, square, loading, disabled, hairline});
     const classes = [
         bem([type, size, {plain, block, round, square, loading, disabled, hairline}]),
-        hairline ? BORDER_SURROUND : ''
+        hairline ? BORDER_SURROUND : '',
     ];
 
     return <View

@@ -24,24 +24,33 @@ const Icon: React.FunctionComponent<IconProps> = (props) => {
     const {dot, name, size, badge, color, classPrefix} = props;
     const isImageIcon = isImage(name);
 
-    const content = () => {
+    const icon = () => {
         if (isImageIcon) {
             return <Image className={`${bem('image')}`} src={name} mode="widthFix"/>;
         } else {
-            return <View className={[classPrefix, isImageIcon ? '' : `${classPrefix}-${name}`].join(" ")}
-                         style={{color, fontSize: addUnit(size)}}/>
+            return <View
+                className={[classPrefix, isImageIcon ? '' : `${classPrefix}-${name}`, props.className].join(" ")}
+                style={{color, fontSize: addUnit(size)}}/>
         }
     }
 
-    return <Badge dot={dot} content={badge}>
-        {content()}
-    </Badge>
+    const content = () => {
+        if (props.badge) {
+            return <Badge dot={dot} content={badge}>
+                {icon()}
+            </Badge>
+        } else {
+            return icon();
+        }
+    }
+
+
+    return content();
 }
 
 Icon.displayName = name;
 
 Icon.defaultProps = {
-    size: 23,
     classPrefix: bem().toString()
 }
 
