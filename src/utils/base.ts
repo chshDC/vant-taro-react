@@ -1,6 +1,9 @@
 // import { PropType, ComponentPublicInstance } from 'vue';
 
-export function noop() {}
+import {ReactElement} from "react";
+
+export function noop() {
+}
 
 export const extend = Object.assign;
 
@@ -17,27 +20,31 @@ export const inBrowser = typeof window !== 'undefined';
 // export type ComponentInstance = ComponentPublicInstance<{}, any>;
 
 export function get(object: any, path: string): any {
-  const keys = path.split('.');
-  let result = object;
+    const keys = path.split('.');
+    let result = object;
 
-  keys.forEach((key) => {
-    result = result[key] ?? '';
-  });
+    keys.forEach((key) => {
+        result = result[key] ?? '';
+    });
 
-  return result;
+    return result;
 }
 
 export type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 
 export function pick<T, U extends keyof T>(
-  obj: T,
-  keys: ReadonlyArray<U>,
-  ignoreUndefined?: boolean
+    obj: T,
+    keys: ReadonlyArray<U>,
+    ignoreUndefined?: boolean
 ) {
-  return keys.reduce((ret, key) => {
-    if (!ignoreUndefined || obj[key] !== undefined) {
-      ret[key] = obj[key];
-    }
-    return ret;
-  }, {} as Writeable<Pick<T, U>>);
+    return keys.reduce((ret, key) => {
+        if (!ignoreUndefined || obj[key] !== undefined) {
+            ret[key] = obj[key];
+        }
+        return ret;
+    }, {} as Writeable<Pick<T, U>>);
+}
+
+export function isReactElement(element: any): element is ReactElement {
+    return !!(element as ReactElement).type;
 }

@@ -28,7 +28,6 @@ const Badge: FC<BadgeProps> = (props) => {
     const renderContent = () => {
         const {dot, max, content} = props;
 
-        console.log(hasContent());
         if (!dot && hasContent()) {
             if (props.extra) {
                 return props.extra;

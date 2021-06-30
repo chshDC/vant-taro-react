@@ -4,7 +4,7 @@
   "description": "",
   "main": "./dist/index.js",
   "dependencies": {
-    "vant": "^2.12.22"
+    "@vant/icons": "^1.6.0"
   },
   "devDependencies": {
     "@tarojs/components": "^3.2.13",

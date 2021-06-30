@@ -19,7 +19,7 @@ const CircularIcon = (
 
 export type LoadingType = 'circular' | 'spinner';
 
-export interface LoadingProps {
+export interface LoadingProps extends React.HTMLAttributes<HTMLElement> {
     size?: number | string,
     color?: string,
     vertical?: boolean,
@@ -34,7 +34,6 @@ const Loading: React.FC<LoadingProps> = (props) => {
         color: props.color,
         ...getSizeStyle(props.size)
     };
-
     const renderText = () => {
         if (props.children) {
             return <>
@@ -52,7 +51,7 @@ const Loading: React.FC<LoadingProps> = (props) => {
 
     const {type, vertical} = props;
     return <>
-        <View className={`${bem([type, {vertical}])}`}>
+        <View className={`${bem([type, {vertical}])} ${props.className}`}>
             <View className={`${bem('spinner', type)}`} style={spinnerStyle}>
                 {type === 'spinner' ? SpinIcon : CircularIcon}
             </View>

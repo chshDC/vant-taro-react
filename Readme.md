@@ -31,7 +31,7 @@ const App = () => {
 
 ### Basic Components
 
-- [ ] Button
+- [x] Button
 - [ ] Cell
 - [x] Icon
 - [ ] Image

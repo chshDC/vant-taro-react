@@ -1,30 +1,29 @@
 @import './var.less';
 
-:root {
-  --van-loading-text-color: @loading-text-color;
-  --van-loading-text-font-size: @loading-text-font-size;
-  --van-loading-spinner-color: @loading-spinner-color;
-  --van-loading-spinner-size: @loading-spinner-size;
-  --van-loading-spinner-animation-duration: @loading-spinner-animation-duration;
-}
+//:root {
+//  --van-loading-text-color: @loading-text-color;
+//  --van-loading-text-font-size: @loading-text-font-size;
+//  --van-loading-spinner-color: @loading-spinner-color;
+//  --van-loading-spinner-size: @loading-spinner-size;
+//  --van-loading-spinner-animation-duration: @loading-spinner-animation-duration;
+//}
 
 .van-loading {
   position: relative;
-  color: var(--van-loading-spinner-color);
+  color: @loading-spinner-color;
   font-size: 0;
   vertical-align: middle;
 
   &__spinner {
     position: relative;
     display: inline-block;
-    width: var(--van-loading-spinner-size);
+    width: @loading-spinner-size;
     // compatible for 1.x, users may set width or height in root element
     max-width: 100%;
-    height: var(--van-loading-spinner-size);
+    height: @loading-spinner-size;
     max-height: 100%;
     vertical-align: middle;
-    animation: van-rotate var(--van-loading-spinner-animation-duration) linear
-      infinite;
+    animation: van-rotate @loading-spinner-animation-duration linear infinite;
 
     &--spinner {
       animation-timing-function: steps(12);
@@ -68,9 +67,9 @@
 
   &__text {
     display: inline-block;
-    margin-left: var(--van-padding-xs);
-    color: var(--van-loading-text-color);
-    font-size: var(--van-loading-text-font-size);
+    margin-left: @padding-xs;
+    color: @loading-text-color;
+    font-size: @loading-text-font-size;
     vertical-align: middle;
   }
 
@@ -80,7 +79,7 @@
     align-items: center;
 
     .van-loading__text {
-      margin: var(--van-padding-xs) 0 0;
+      margin: @padding-xs 0 0;
     }
   }
 }
