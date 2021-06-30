@@ -1,5 +1,5 @@
 import { Badge } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should render nothing when content is empty string', () => {
   const wrapper = mount(Badge, {

@@ -1,5 +1,5 @@
 import { Empty } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should render image slot correctly', () => {
   const wrapper = mount(Empty, {

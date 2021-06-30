@@ -1,5 +1,5 @@
 import { Tag } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should emit close event when clicking the close icon', () => {
   const wrapper = mount(Tag, {

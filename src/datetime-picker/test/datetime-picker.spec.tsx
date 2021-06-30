@@ -1,5 +1,5 @@
 import { DatetimePicker } from '..';
-import { mount, later } from '../../../test';
+import { mount, later } from '../../../test/test';
 import { reactive } from 'vue';
 import { useExpose } from '../../composables/use-expose';
 

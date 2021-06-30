@@ -1,5 +1,5 @@
 import { ContactCard } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should emit click event when clicked', () => {
   const wrapper = mount(ContactCard);

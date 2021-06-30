@@ -1,5 +1,5 @@
 import { Card } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should emit click event after clicked', () => {
   const onClick = jest.fn();

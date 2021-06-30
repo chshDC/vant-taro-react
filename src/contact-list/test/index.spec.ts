@@ -1,5 +1,5 @@
 import { ContactList } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 const contactInfo = {
   name: 'jack',

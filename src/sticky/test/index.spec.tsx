@@ -1,6 +1,6 @@
 import { nextTick, ref } from 'vue';
 import { VueWrapper } from '@vue/test-utils';
-import { mockScrollTop, mount } from '../../../test';
+import { mockScrollTop, mount } from '../../../test/test';
 import { Sticky } from '..';
 import { ComponentInstance } from '../../utils';
 

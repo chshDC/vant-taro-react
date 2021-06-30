@@ -1,4 +1,4 @@
-import { later, mount } from '../../../test';
+import { later, mount } from '../../../test/test';
 import { CouponList } from '..';
 
 const coupon = {

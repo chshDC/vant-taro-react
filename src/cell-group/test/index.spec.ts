@@ -1,5 +1,5 @@
 import { CellGroup } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should render title slot correctly', () => {
   const wrapper = mount(CellGroup, {

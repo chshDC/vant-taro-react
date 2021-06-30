@@ -1,5 +1,5 @@
 import { Calendar, CalendarDayItem } from '..';
-import { mount, later } from '../../../test';
+import { mount, later } from '../../../test/test';
 import { getNextDay, getPrevDay } from '../utils';
 import { now, minDate, maxDate } from './utils';
 import type { ComponentInstance } from '../../utils';

@@ -1,5 +1,5 @@
 import { Rate } from '..';
-import { mount, triggerDrag } from '../../../test';
+import { mount, triggerDrag } from '../../../test/test';
 import type { DOMWrapper } from '@vue/test-utils';
 
 function mockGetBoundingClientRect(items: DOMWrapper<Element>[]) {

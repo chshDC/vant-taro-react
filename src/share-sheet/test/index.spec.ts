@@ -1,5 +1,5 @@
 import { ShareSheet } from '..';
-import { mount, trigger, later } from '../../../test';
+import { mount, trigger, later } from '../../../test/test';
 
 test('should render cancel text when using cancel-text prop', async () => {
   const wrapper = mount(ShareSheet, {

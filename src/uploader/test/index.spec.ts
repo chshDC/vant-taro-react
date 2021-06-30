@@ -1,6 +1,6 @@
 import { nextTick } from 'vue';
 import Uploader, { UploaderFileListItem } from '..';
-import { mount, later, triggerDrag } from '../../../test';
+import { mount, later, triggerDrag } from '../../../test/test';
 
 const mockFileDataUrl = 'data:image/test';
 const mockFile = new File([new ArrayBuffer(10000)], 'test.jpg', {

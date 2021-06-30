@@ -47,8 +47,6 @@ const Button: FC<ButtonProps> = (props) => {
         if (props.loading !== undefined && isReactElement(props.loading)) {
             return props.loading;
         }
-
-        // console.log(`${bem('loading')}`);
         return (
             <Loading
                 size={props.loadingSize}
@@ -127,12 +125,12 @@ const Button: FC<ButtonProps> = (props) => {
     const {type, size, block, round, plain, square, loading, disabled, hairline, iconPosition} = props;
 
     // console.log("================");
+    // console.log({plain, block, round, square, loading, disabled, hairline});
     const classes = [
-        bem([type, size], {plain, block, round, square, loading, disabled, hairline}),
+        bem([type, size, {plain, block, round, square, loading, disabled, hairline}]),
         hairline ? BORDER_SURROUND : ''
     ];
 
-    // console.log(classes);
     return <View
         // type={props.type}
         className={`${classes.join(" ")}`}

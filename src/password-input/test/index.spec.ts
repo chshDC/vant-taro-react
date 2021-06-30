@@ -1,4 +1,4 @@
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 import { PasswordInput } from '..';
 
 test('should emit focus event when security is touched', () => {

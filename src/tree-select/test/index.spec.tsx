@@ -1,5 +1,5 @@
 import { TreeSelect } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 const mockItem = {
   text: 'city1',

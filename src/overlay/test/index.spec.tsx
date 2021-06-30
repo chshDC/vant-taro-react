@@ -1,4 +1,4 @@
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 import { Overlay } from '..';
 
 test('should change z-index when using z-index prop', () => {

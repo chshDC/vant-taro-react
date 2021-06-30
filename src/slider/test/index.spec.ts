@@ -5,7 +5,7 @@ import {
   trigger,
   triggerDrag,
   mockGetBoundingClientRect,
-} from '../../../test';
+} from '../../../test/test';
 
 function mockRect(vertical?: boolean) {
   return mockGetBoundingClientRect({

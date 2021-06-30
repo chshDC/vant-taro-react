@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 import { Radio } from '../../radio';
 import { RadioGroup } from '../index';
 

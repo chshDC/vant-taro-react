@@ -1,5 +1,5 @@
 import { Cell } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should render default slot correctly', () => {
   const wrapper = mount(Cell, {

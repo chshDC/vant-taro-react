@@ -1,5 +1,5 @@
 import { Circle } from '..';
-import { mount, later } from '../../../test';
+import { mount, later } from '../../../test/test';
 
 // TODO
 // test('should update to final rate immediately if speed is 0', async () => {

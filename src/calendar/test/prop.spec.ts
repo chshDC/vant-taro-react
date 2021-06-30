@@ -1,5 +1,5 @@
 import { Calendar } from '..';
-import { mount, later } from '../../../test';
+import { mount, later } from '../../../test/test';
 import { minDate, maxDate } from './utils';
 
 test('max-range prop when type is range and showConfirm is false', async () => {

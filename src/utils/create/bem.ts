@@ -31,14 +31,11 @@ function gen(name: string, mods?: Mods): string {
 
 export function createBEM(name: string) {
     return function (el?: Mods, mods?: Mods): Mods {
-        console.log(el, mods);
         if (el && typeof el !== 'string') {
             mods = el;
             el = '';
         }
         el = el ? `${name}__${el}` : name;
-        console.log(name, el, mods);
-
         return `${el}${gen(el, mods)}`;
     };
 }

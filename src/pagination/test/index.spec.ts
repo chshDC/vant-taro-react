@@ -1,4 +1,4 @@
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 import { Pagination } from '..';
 
 test('should render prev-text、next-text slot correctly', () => {

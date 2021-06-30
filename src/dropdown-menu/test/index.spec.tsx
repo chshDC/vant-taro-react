@@ -1,4 +1,4 @@
-import { later, mount } from '../../../test';
+import { later, mount } from '../../../test/test';
 import { reactive, ref, onMounted } from 'vue';
 import DropdownItem from '../../dropdown-item';
 import DropdownMenu, { DropdownMenuDirection } from '..';

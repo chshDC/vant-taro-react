@@ -1,5 +1,5 @@
 import { Popover } from '..';
-import { later, mount, trigger } from '../../../test';
+import { later, mount, trigger } from '../../../test/test';
 
 const baseActions = [
   { text: 'Option 1' },

@@ -1,5 +1,5 @@
 import { ref, nextTick } from 'vue';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 import { Checkbox } from '../../checkbox';
 import { CheckboxGroup, CheckboxGroupToggleAllOptions } from '..';
 

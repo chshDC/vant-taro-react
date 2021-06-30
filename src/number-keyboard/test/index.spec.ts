@@ -1,5 +1,5 @@
 import { NumberKeyboard } from '..';
-import { mount, trigger, later } from '../../../test';
+import { mount, trigger, later } from '../../../test/test';
 
 function clickKey(key: Parameters<typeof trigger>[0]) {
   trigger(key, 'touchstart');

@@ -1,5 +1,5 @@
 import { Picker } from '..';
-import { mount, triggerDrag } from '../../../test';
+import { mount, triggerDrag } from '../../../test/test';
 import type { ComponentInstance } from '../../utils';
 
 const COLUMNS = [

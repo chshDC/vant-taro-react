@@ -1,5 +1,5 @@
 import { NoticeBar } from '..';
-import { mount, later } from '../../../test';
+import { mount, later } from '../../../test/test';
 import type { ComponentInstance } from '../../utils';
 
 test('should emit close event when close icon is clicked', () => {

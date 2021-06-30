@@ -1,5 +1,5 @@
 import TimePicker from '../TimePicker';
-import { mount, later, triggerDrag } from '../../../test';
+import { mount, later, triggerDrag } from '../../../test/test';
 import { ref, reactive } from 'vue';
 import { useExpose } from '../../composables/use-expose';
 

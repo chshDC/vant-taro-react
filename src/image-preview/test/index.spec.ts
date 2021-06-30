@@ -6,7 +6,7 @@ import {
   trigger,
   triggerDrag,
   mockGetBoundingClientRect,
-} from '../../../test';
+} from '../../../test/test';
 import { ImagePreview } from '../function-call';
 import ImagePreviewComponent from '../ImagePreview';
 

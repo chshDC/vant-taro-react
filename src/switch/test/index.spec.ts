@@ -1,5 +1,5 @@
 import { Switch } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should emit update:modelValue event when click the switch button', async () => {
   const wrapper = mount(Switch);

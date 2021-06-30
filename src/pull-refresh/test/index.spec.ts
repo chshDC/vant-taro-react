@@ -5,7 +5,7 @@ import {
   trigger,
   triggerDrag,
   mockScrollTop,
-} from '../../../test';
+} from '../../../test/test';
 
 test('should render different head content in different pulling status', async () => {
   const wrapper = mount(PullRefresh);

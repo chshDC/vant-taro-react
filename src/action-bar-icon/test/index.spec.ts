@@ -1,4 +1,4 @@
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 import { ActionBarIcon } from '..';
 
 test('should render default slot correctly', () => {

@@ -1,5 +1,5 @@
 import { NavBar } from '..';
-import { mount, mockGetBoundingClientRect, later } from '../../../test';
+import { mount, mockGetBoundingClientRect, later } from '../../../test/test';
 
 test('should render left slot correctly', () => {
   const wrapper = mount(NavBar, {

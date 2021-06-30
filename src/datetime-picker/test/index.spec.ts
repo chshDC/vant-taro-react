@@ -1,4 +1,4 @@
-import { later, mount, triggerDrag } from '../../../test';
+import { later, mount, triggerDrag } from '../../../test/test';
 import DatePicker from '../DatePicker';
 
 test('month-day type', async () => {

@@ -1,6 +1,6 @@
 import { nextTick } from 'vue';
 import { Stepper } from '..';
-import { mount, later } from '../../../test';
+import { mount, later } from '../../../test/test';
 
 test('should disable buttons and input when using disabled prop', () => {
   const wrapper = mount(Stepper, {

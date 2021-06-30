@@ -1,4 +1,4 @@
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 import { Loading } from '..';
 
 test('should change loading size when using size prop', () => {

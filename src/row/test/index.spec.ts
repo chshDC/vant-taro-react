@@ -1,5 +1,5 @@
 import { Row } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should add "van-row--nowrap" class when wrap prop is false', () => {
   const wrapper = mount(Row, {

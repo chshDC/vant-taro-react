@@ -1,4 +1,4 @@
-import { later, mount, triggerDrag } from '../../../test';
+import { later, mount, triggerDrag } from '../../../test/test';
 import { Picker } from '..';
 import PickerColumn from '../PickerColumn';
 

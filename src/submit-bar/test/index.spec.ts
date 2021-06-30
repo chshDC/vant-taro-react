@@ -1,5 +1,5 @@
 import { SubmitBar } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should emit submit event when submit button is clicked', () => {
   const wrapper = mount(SubmitBar);

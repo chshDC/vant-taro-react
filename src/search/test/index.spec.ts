@@ -1,5 +1,5 @@
 import { Search } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 import type { ComponentInstance } from '../../utils';
 
 test('should emit update:modelValue event when input value changed', () => {

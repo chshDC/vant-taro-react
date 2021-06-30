@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import { mount, later } from '../../../test';
+import { mount, later } from '../../../test/test';
 import { Tab } from '..';
 import { Tabs } from '../../tabs';
 

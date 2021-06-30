@@ -1,4 +1,4 @@
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 import { Lazyload } from '../../lazyload';
 import VanImage from '..';
 

@@ -1,4 +1,4 @@
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 import { Button } from '..';
 
 test('should emit click event', () => {

@@ -1,5 +1,5 @@
 import { Progress } from '..';
-import { mount } from '../../../test';
+import { mount } from '../../../test/test';
 
 test('should re-calc width if showing pivot dynamically', async () => {
   const wrapper = mount(Progress, {
