@@ -29,7 +29,6 @@ const CellGroup: FC<CellGroupProps> = (props) => {
 		</View>
 	);
 
-	console.log(props.title ? renderTitle() : null);
 	return <>
 		{props.title ? renderTitle() : null}
 		{renderGroup()}

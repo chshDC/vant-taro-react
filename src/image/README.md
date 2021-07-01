@@ -9,11 +9,7 @@ Enhanced img tag with multiple image fill modes, support for image lazy loading,
 Register component globally via `app.use`, refer to [Component Registration](#/en-US/advanced-usage#zu-jian-zhu-ce) for more registration ways.
 
 ```js
-import { createApp } from 'vue';
-import { Image as VanImage } from 'vant';
-
-const app = createApp();
-app.use(VanImage);
+import {Image} from '../../components/vant-taro-react/src'
 ```
 
 ## Usage
@@ -21,13 +17,13 @@ app.use(VanImage);
 ### Basic Usage
 
 ```html
-<van-image width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+<Image width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" />
 ```
 
 ### Fit Mode
 
 ```html
-<van-image
+<Image
   width="10rem"
   height="10rem"
   fit="contain"
@@ -40,7 +36,7 @@ app.use(VanImage);
 Show round image, it may not works at `fit=contain` and `fit=scale-down`.
 
 ```html
-<van-image
+<Image
   round
   width="10rem"
   height="10rem"
@@ -51,21 +47,14 @@ Show round image, it may not works at `fit=contain` and `fit=scale-down`.
 ### Lazy Load
 
 ```html
-<van-image
+<Image
   width="100"
   height="100"
-  lazy-load
+  lazyLoad
   src="https://img.yzcdn.cn/vant/cat.jpeg"
 />
 ```
 
-```js
-import { createApp } from 'vue';
-import { Lazyload } from 'vant';
-
-const app = createApp();
-app.use(Lazyload);
-```
 
 ## API
 
@@ -80,13 +69,13 @@ app.use(Lazyload);
 | height | Height | _number \| string_ | - |
 | radius | Border Radius | _number \| string_ | `0` |
 | round | Whether to be round | _boolean_ | `false` |
-| lazy-load | Whether to enable lazy load，should register [Lazyload](#/en-US/lazyload) component | _boolean_ | `false` |
-| show-error | Whether to show error placeholder | _boolean_ | `true` |
-| show-loading | Whether to show loading placeholder | _boolean_ | `true` |
-| error-icon | Error icon | _string_ | `photo-fail` |
-| loading-icon | Loading icon | _string_ | `photo` |
-| icon-size `v3.0.11` | Icon size | _number \| string_ | `32px` |
-| icon-prefix | Icon className prefix | _string_ | `van-icon` |
+| lazyLoad | Whether to enable lazy load，should register [Lazyload](#/en-US/lazyload) component | _boolean_ | `false` |
+| showError | Whether to show error placeholder | _boolean_ | `true` |
+| showLoading | Whether to show loading placeholder | _boolean_ | `true` |
+| errorIcon | Error icon | _string_ | `photo-fail` |
+| loadingIcon | Loading icon | _string_ | `photo` |
+| iconSize `v3.0.11` | Icon size | _number \| string_ | `32px` |
+| iconPrefix | Icon className prefix | _string_ | `van-icon` |
 
 ### fit optional value
 
@@ -103,16 +92,8 @@ app.use(Lazyload);
 | Event | Description                    | Arguments           |
 | ----- | ------------------------------ | ------------------- |
 | click | Emitted when image is clicked  | _event: MouseEvent_ |
-| load  | Emitted when image loaded      | -                   |
-| error | Emitted when image load failed | -                   |
-
-### Slots
-
-| Name    | Description                        |
-| ------- | ---------------------------------- |
-| default | Custom the content below the image |
-| loading | Custom loading placeholder         |
-| error   | Custom error placeholder           |
+| load  | Emitted when image loaded      | _event: BaseEventOrig<onLoadEventDetail>_ |
+| error | Emitted when image load failed | _event: BaseEventOrig<onErrorEventDetail>_|
 
 ### CSS Variables
 

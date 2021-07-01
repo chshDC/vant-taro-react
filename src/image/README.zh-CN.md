@@ -9,11 +9,7 @@
 通过以下方式来全局注册组件，更多注册方式请参考[组件注册](#/zh-CN/advanced-usage#zu-jian-zhu-ce)。
 
 ```js
-import { createApp } from 'vue';
-import { Image as VanImage } from 'vant';
-
-const app = createApp();
-app.use(VanImage);
+import {Image} from '../../components/vant-taro-react/src'
 ```
 
 ## 代码演示
@@ -23,7 +19,7 @@ app.use(VanImage);
 基础用法与原生 `img` 标签一致，可以设置 `src`、`width`、`height`、`alt` 等原生属性。
 
 ```html
-<van-image width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+<Image width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" />
 ```
 
 ### 填充模式
@@ -31,7 +27,7 @@ app.use(VanImage);
 通过 `fit` 属性可以设置图片填充模式，可选值见下方表格。
 
 ```html
-<van-image
+<Image
   width="10rem"
   height="10rem"
   fit="contain"
@@ -44,7 +40,7 @@ app.use(VanImage);
 通过 `round` 属性可以设置图片变圆，注意当图片宽高不相等且 `fit` 为 `contain` 或 `scale-down` 时，将无法填充一个完整的圆形。
 
 ```html
-<van-image
+<Image
   round
   width="10rem"
   height="10rem"
@@ -57,42 +53,30 @@ app.use(VanImage);
 设置 `lazy-load` 属性来开启图片懒加载，需要搭配 [Lazyload](#/zh-CN/lazyload) 组件使用。
 
 ```html
-<van-image
+<Image
   width="100"
   height="100"
-  lazy-load
+  lazyLoad
   src="https://img.yzcdn.cn/vant/cat.jpeg"
 />
 ```
 
-```js
-import { createApp } from 'vue';
-import { Lazyload } from 'vant';
-
-const app = createApp();
-app.use(Lazyload);
-```
-
 ### 加载中提示
 
-`Image` 组件提供了默认的加载中提示，支持通过 `loading` 插槽自定义内容。
+`Image` 组件提供了默认的加载中提示，支持通过 `loadingIcon` 使用Icon name或自定义内容。
 
 ```html
-<van-image src="https://img.yzcdn.cn/vant/cat.jpeg">
-  <template v-slot:loading>
-    <van-loading type="spinner" size="20" />
-  </template>
-</van-image>
+<Image src="https://img.yzcdn.cn/vant/cat.jpeg" loadingIcon={<Text>加载中。。。</Text>}>
+</Image>
 ```
 
 ### 加载失败提示
 
-`Image` 组件提供了默认的加载失败提示，支持通过 `error` 插槽自定义内容。
+`Image` 组件提供了默认的加载失败提示，支持通过 `errorIcon` 使用Icon name或自定义内容。
 
 ```html
-<van-image src="https://img.yzcdn.cn/vant/cat.jpeg">
-  <template v-slot:error>加载失败</template>
-</van-image>
+<Image src="https://img.yzcdn.cn/vant/cat.jpeg" errorIcon={<Text>加载失败</Text>}>
+<Image>
 ```
 
 ## API
@@ -108,13 +92,13 @@ app.use(Lazyload);
 | height | 高度，默认单位为 `px` | _number \| string_ | - |
 | radius | 圆角大小，默认单位为 `px` | _number \| string_ | `0` |
 | round | 是否显示为圆形 | _boolean_ | `false` |
-| lazy-load | 是否开启图片懒加载，须配合 [Lazyload](#/zh-CN/lazyload) 组件使用 | _boolean_ | `false` |
-| show-error | 是否展示图片加载失败提示 | _boolean_ | `true` |
-| show-loading | 是否展示图片加载中提示 | _boolean_ | `true` |
-| error-icon | 失败时提示的[图标名称](#/zh-CN/icon)或图片链接 | _string_ | `photo-fail` |
-| loading-icon | 加载时提示的[图标名称](#/zh-CN/icon)或图片链接 | _string_ | `photo` |
-| icon-size `v3.0.11` | 加载图标和失败图标的大小 | _number \| string_ | `32px` |
-| icon-prefix | 图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props) | _string_ | `van-icon` |
+| lazyLoad | 是否开启图片懒加载，须配合 [Lazyload](#/zh-CN/lazyload) 组件使用 | _boolean_ | `false` |
+| showError | 是否展示图片加载失败提示 | _boolean_ | `true` |
+| showLoading | 是否展示图片加载中提示 | _boolean_ | `true` |
+| errorIcon | 失败时提示的[图标名称](#/zh-CN/icon)或图片链接 | _string_ | `photo-fail` |
+| loadingIcon | 加载时提示的[图标名称](#/zh-CN/icon)或图片链接 | _string_ | `photo` |
+| iconSize  | 加载图标和失败图标的大小 | _number \| string_ | `32px` |
+| iconPrefix | 图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props) | _string_ | `van-icon` |
 
 ### 图片填充模式 
 
@@ -131,16 +115,8 @@ app.use(Lazyload);
 | 事件名 | 说明               | 回调参数            |
 | ------ | ------------------ | ------------------- |
 | click  | 点击图片时触发     | _event: MouseEvent_ |
-| load   | 图片加载完毕时触发 | -                   |
-| error  | 图片加载失败时触发 | -                   |
-
-### Slots
-
-| 名称    | 说明                       |
-| ------- | -------------------------- |
-| default | 自定义图片下方的内容       |
-| loading | 自定义加载中的提示内容     |
-| error   | 自定义加载失败时的提示内容 |
+| load   | 图片加载完毕时触发 | _event: BaseEventOrig<onLoadEventDetail>_ |
+| error  | 图片加载失败时触发 | _event: BaseEventOrig<onErrorEventDetail>_|
 
 ### 样式变量
 
@@ -164,32 +140,8 @@ app.use(Lazyload);
 
 ```html
 <!-- 错误写法 -->
-<van-image src="./image.png" />
+<Image src="./image.png" />
 
 <!-- 正确写法 -->
-<van-image :src="require('./image.png')" />
+<Image :src="require('./image.png')" />
 ```
-
-> 对此更详细的解释可以参考 vue-loader 的[处理资源路径](https://vue-loader.vuejs.org/zh/guide/asset-url.html)章节。
-
-### 使用 image 标签无法渲染？
-
-使用 Image 组件时，可能会遇到将 \<image> 作为标签名时无法渲染的问题，比如下面的写法：
-
-```html
-<template>
-  <image src="xxx" />
-</template>
-
-<script>
-import { Image } from 'vant';
-
-export default {
-  components: {
-    Image,
-  },
-};
-<script>
-```
-
-这是因为 \<image> 标签是原生的 SVG 标签，Vue 不允许将原生标签名注册为组件名，使用 \<van-image> 即可规避这个问题。

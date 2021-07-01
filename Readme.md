@@ -32,9 +32,9 @@ const App = () => {
 ### Basic Components
 
 - [x] Button
-- [ ] Cell
+- [x] Cell
 - [x] Icon
-- [ ] Image
+- [x] Image
 - [ ] Layout
 - [ ] Popup
 - [ ] Built-in style
