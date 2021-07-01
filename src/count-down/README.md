@@ -6,14 +6,12 @@ Used to display the countdown value in real time, and precision supports millise
 
 ### Install
 
-Register component globally via `app.use`, refer to [Component Registration](#/en-US/advanced-usage#zu-jian-zhu-ce) for more registration ways.
+Register component globally via `app.use`, refer to [Component Registration](#/en-US/advanced-usage#zu-jian-zhu-ce) for
+more registration ways.
 
 ```js
-import { createApp } from 'vue';
-import { CountDown } from 'vant';
-
-const app = createApp();
-app.use(CountDown);
+import '../../components/vant-taro-react/src/index.css';
+import {CountDown} from '../../components/vant-taro-react/src'
 ```
 
 ## Usage
@@ -21,109 +19,72 @@ app.use(CountDown);
 ### Basic Usage
 
 ```html
-<van-count-down :time="time" />
-```
 
-```js
-import { ref } from 'vue';
-
-export default {
-  setup() {
-    const time = ref(30 * 60 * 60 * 1000);
-    return { time };
-  },
-};
+<CountDown time={30 * 60 * 60 * 1000}/>
 ```
 
 ### Custom Format
 
 ```html
-<van-count-down :time="time" format="DD Day, HH:mm:ss" />
+<CountDown time={30 * 60 * 60 * 1000} format="DD Day, HH:mm:ss"/>
 ```
 
 ### Millisecond
 
 ```html
-<van-count-down millisecond :time="time" format="HH:mm:ss:SS" />
+<CountDown millisecond time={30 * 60 * 60 * 1000} format="HH:mm:ss:SS"/>
 ```
 
 ### Custom Style
 
 ```html
-<van-count-down :time="time">
-  <template #default="timeData">
-    <span class="block">{{ timeData.hours }}</span>
-    <span class="colon">:</span>
-    <span class="block">{{ timeData.minutes }}</span>
-    <span class="colon">:</span>
-    <span class="block">{{ timeData.seconds }}</span>
-  </template>
-</van-count-down>
+<CountDown :time="time" render={(current)=>{
+	return <>
+		<span class="block">{ current.hours }</span>
+		<span class="colon">:</span>
+		<span class="block">{ current.minutes }</span>
+		<span class="colon">:</span>
+		<span class="block">{ current.seconds }</span>
+	</>
+	}} />
+	
 
 <style>
-  .colon {
-    display: inline-block;
-    margin: 0 4px;
-    color: #ee0a24;
-  }
-  .block {
-    display: inline-block;
-    width: 22px;
-    color: #fff;
-    font-size: 12px;
-    text-align: center;
-    background-color: #ee0a24;
-  }
+	.colon {
+		display: inline-block;
+		margin: 0 4px;
+		color: #ee0a24;
+	}
+
+	.block {
+		display: inline-block;
+		width: 22px;
+		color: #fff;
+		font-size: 12px;
+		text-align: center;
+		background-color: #ee0a24;
+	}
 </style>
 ```
 
 ### Manual Control
 
-```html
-<van-count-down
-  ref="countDown"
-  millisecond
-  :time="3000"
-  :auto-start="false"
-  format="ss:SSS"
-  @finish="onFinish"
-/>
-<van-grid clickable :column-num="3">
-  <van-grid-item text="Start" icon="play-circle-o" @click="start" />
-  <van-grid-item text="Pause" icon="pause-circle-o" @click="pause" />
-  <van-grid-item text="Reset" icon="replay" @click="reset" />
-</van-grid>
+```jsx
+	let CountDownRef = useRef<CountDownController>();
+	return <View>
+		{/*<Icon name="plus"/>*/}
+		<CountDown ref={CountDownRef} millisecond autoStart={false} time={30 * 60 * 60 * 1000} format="ss:SSS"/>
+		<Button onClick={() => {
+			CountDownRef.current?.start();
+		}}>开始</Button>
+		<Button onClick={() => {
+			CountDownRef.current?.pause()
+		}}>暂停</Button>
+		<Button onClick={() => {
+			CountDownRef.current?.reset();
+		}}>重置</Button>
+	</View>
 ```
-
-```js
-import { Toast } from 'vant';
-
-export default {
-  setup() {
-    const countDown = ref(null);
-
-    const start = () => {
-      countDown.value.start();
-    };
-    const pause = () => {
-      countDown.value.pause();
-    };
-    const reset = () => {
-      countDown.value.reset();
-    };
-    const onFinish = () => Toast('Finished');
-
-    return {
-      start,
-      pause,
-      reset,
-      onFinish,
-      countDown,
-    };
-  },
-};
-```
-
 ## API
 
 ### Props
@@ -132,7 +93,7 @@ export default {
 | --- | --- | --- | --- |
 | time | Total time, unit milliseconds | _number \| string_ | `0` |
 | format | Time format | _string_ | `HH:mm:ss` |
-| auto-start | Whether to auto start count down | _boolean_ | `true` |
+| autoStart | Whether to auto start count down | _boolean_ | `true` |
 | millisecond | Whether to enable millisecond render | _boolean_ | `false` |
 
 ### Available formats
@@ -153,12 +114,6 @@ export default {
 | ------ | -------------------------------- | -------------------------- |
 | finish | Emitted when count down finished | -                          |
 | change | Emitted when count down changed  | _currentTime: CurrentTime_ |
-
-### Slots
-
-| Name    | Description    | SlotProps                  |
-| ------- | -------------- | -------------------------- |
-| default | Custom Content | _currentTime: CurrentTime_ |
 
 ### CurrentTime Structure
 
@@ -183,7 +138,8 @@ Use [ref](https://v3.vuejs.org/guide/component-template-refs.html) to get CountD
 
 ### CSS Variables
 
-The component provides the following CSS variables, which can be used to customize styles. Please refer to [ConfigProvider component](#/en-US/config-provider).
+The component provides the following CSS variables, which can be used to customize styles. Please refer
+to [ConfigProvider component](#/en-US/config-provider).
 
 | Name                         | Default Value               | Description |
 | ---------------------------- | --------------------------- | ----------- |

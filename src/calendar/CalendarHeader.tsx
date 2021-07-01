@@ -1,58 +1,60 @@
-import { defineComponent } from 'vue';
-import { createNamespace } from '../utils';
-import { t, bem } from './utils';
+import React, {FC, ReactElement} from "react";
+
+import {createNamespace, isReactElement} from '../utils';
+import {t, bem} from './utils';
+import {View} from "@tarojs/components";
 
 const [name] = createNamespace('calendar-header');
 
-export default defineComponent({
-  name,
+export interface CalendarHeaderProps {
+	title: string | ReactElement,
+	subtitle: string,
+	showTitle: boolean,
+	showSubtitle: boolean,
+	firstDayOfWeek: number,
+}
 
-  props: {
-    title: String,
-    subtitle: String,
-    showTitle: Boolean,
-    showSubtitle: Boolean,
-    firstDayOfWeek: Number,
-  },
+const CalendarHeader: FC<CalendarHeaderProps> = (props) => {
+	const renderTitle = () => {
+		if (props.showTitle) {
+			const title = isReactElement(props.title) ? props.title : props.title || t('title');
+			return <View className={`${bem('header-title')}`}>{title}</View>;
+		}
+	};
 
-  setup(props, { slots }) {
-    const renderTitle = () => {
-      if (props.showTitle) {
-        const text = props.title || t('title');
-        const title = slots.title ? slots.title() : text;
-        return <div class={bem('header-title')}>{title}</div>;
-      }
-    };
+	const renderSubtitle = () => {
+		if (props.showSubtitle) {
+			return <View className={`${bem('header-subtitle')}`}>{props.subtitle}</View>;
+		}
+	};
 
-    const renderSubtitle = () => {
-      if (props.showSubtitle) {
-        return <div class={bem('header-subtitle')}>{props.subtitle}</div>;
-      }
-    };
+	const renderWeekDays = () => {
+		const {firstDayOfWeek} = props;
+		const weekdays = t('weekdays');
+		const renderWeekDays = [
+			...weekdays.slice(firstDayOfWeek, 7),
+			...weekdays.slice(0, firstDayOfWeek),
+		];
 
-    const renderWeekDays = () => {
-      const { firstDayOfWeek } = props;
-      const weekdays = t('weekdays');
-      const renderWeekDays = [
-        ...weekdays.slice(firstDayOfWeek, 7),
-        ...weekdays.slice(0, firstDayOfWeek),
-      ];
+		return (
+			<View className={`${bem('weekdays')}`}>
+				{renderWeekDays.map((text) => (
+					<View className={`${bem('weekday')}`}>{text}</View>
+				))}
+			</View>
+		);
+	};
 
-      return (
-        <div class={bem('weekdays')}>
-          {renderWeekDays.map((text) => (
-            <span class={bem('weekday')}>{text}</span>
-          ))}
-        </div>
-      );
-    };
 
-    return () => (
-      <div class={bem('header')}>
-        {renderTitle()}
-        {renderSubtitle()}
-        {renderWeekDays()}
-      </div>
-    );
-  },
-});
+	return <View className={`${bem('header')}`}>
+		{renderTitle()}
+		{renderSubtitle()}
+		{renderWeekDays()}
+	</View>
+}
+
+CalendarHeader.displayName
+CalendarHeader.defaultProps = {}
+
+export {CalendarHeader};
+export default CalendarHeader;

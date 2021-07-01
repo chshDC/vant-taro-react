@@ -9,11 +9,8 @@
 通过以下方式来全局注册组件，更多注册方式请参考[组件注册](#/zh-CN/advanced-usage#zu-jian-zhu-ce)。
 
 ```js
-import { createApp } from 'vue';
-import { CountDown } from 'vant';
-
-const app = createApp();
-app.use(CountDown);
+import '../../components/vant-taro-react/src/index.css';
+import {CountDown} from '../../components/vant-taro-react/src'
 ```
 
 ## 代码演示
@@ -23,18 +20,7 @@ app.use(CountDown);
 `time` 属性表示倒计时总时长，单位为毫秒。
 
 ```html
-<van-count-down :time="time" />
-```
-
-```js
-import { ref } from 'vue';
-
-export default {
-  setup() {
-    const time = ref(30 * 60 * 60 * 1000);
-    return { time };
-  },
-};
+<CountDown time={30 * 60 * 60 * 1000}/>
 ```
 
 ### 自定义格式
@@ -42,7 +28,7 @@ export default {
 通过 `format` 属性设置倒计时文本的内容。
 
 ```html
-<van-count-down :time="time" format="DD 天 HH 时 mm 分 ss 秒" />
+<CountDown time={30 * 60 * 60 * 1000} format="DD Day, HH:mm:ss"/>
 ```
 
 ### 毫秒级渲染
@@ -50,7 +36,7 @@ export default {
 倒计时默认每秒渲染一次，设置 `millisecond` 属性可以开启毫秒级渲染。
 
 ```html
-<van-count-down millisecond :time="time" format="HH:mm:ss:SS" />
+<CountDown millisecond time={30 * 60 * 60 * 1000} format="HH:mm:ss:SS"/>
 ```
 
 ### 自定义样式
@@ -58,15 +44,15 @@ export default {
 通过插槽自定义倒计时的样式，`timeData` 对象格式见下方表格。
 
 ```html
-<van-count-down :time="time">
-  <template #default="timeData">
-    <span class="block">{{ timeData.hours }}</span>
-    <span class="colon">:</span>
-    <span class="block">{{ timeData.minutes }}</span>
-    <span class="colon">:</span>
-    <span class="block">{{ timeData.seconds }}</span>
-  </template>
-</van-count-down>
+<CountDown :time="time" render={(current)=>{
+	return <>
+	<span class="block">{ current.hours }</span>
+	<span class="colon">:</span>
+	<span class="block">{ current.minutes }</span>
+	<span class="colon">:</span>
+	<span class="block">{ current.seconds }</span>
+</>
+}} />
 
 <style>
   .colon {
@@ -89,49 +75,21 @@ export default {
 
 通过 ref 获取到组件实例后，可以调用 `start`、`pause`、`reset` 方法。
 
-```html
-<van-count-down
-  ref="countDown"
-  millisecond
-  :time="3000"
-  :auto-start="false"
-  format="ss:SSS"
-  @finish="onFinish"
-/>
-<van-grid clickable>
-  <van-grid-item text="开始" icon="play-circle-o" @click="start" />
-  <van-grid-item text="暂停" icon="pause-circle-o" @click="pause" />
-  <van-grid-item text="重置" icon="replay" @click="reset" />
-</van-grid>
-```
-
-```js
-import { Toast } from 'vant';
-
-export default {
-  setup() {
-    const countDown = ref(null);
-
-    const start = () => {
-      countDown.value.start();
-    };
-    const pause = () => {
-      countDown.value.pause();
-    };
-    const reset = () => {
-      countDown.value.reset();
-    };
-    const onFinish = () => Toast('倒计时结束');
-
-    return {
-      start,
-      pause,
-      reset,
-      onFinish,
-      countDown,
-    };
-  },
-};
+```jsx
+	let CountDownRef = useRef<CountDownController>();
+	return <View>
+		{/*<Icon name="plus"/>*/}
+		<CountDown ref={CountDownRef} millisecond autoStart={false} time={30 * 60 * 60 * 1000} format="ss:SSS"/>
+		<Button onClick={() => {
+			CountDownRef.current?.start();
+		}}>开始</Button>
+		<Button onClick={() => {
+			CountDownRef.current?.pause()
+		}}>暂停</Button>
+		<Button onClick={() => {
+			CountDownRef.current?.reset();
+		}}>重置</Button>
+	</View>
 ```
 
 ## API
@@ -142,7 +100,7 @@ export default {
 | ----------- | -------------------- | ------------------ | ---------- |
 | time        | 倒计时时长，单位毫秒 | _number \| string_ | `0`        |
 | format      | 时间格式             | _string_           | `HH:mm:ss` |
-| auto-start  | 是否自动开始倒计时   | _boolean_          | `true`     |
+| autoStart  | 是否自动开始倒计时   | _boolean_          | `true`     |
 | millisecond | 是否开启毫秒级渲染   | _boolean_          | `false`    |
 
 ### format 格式

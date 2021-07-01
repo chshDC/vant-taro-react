@@ -1,266 +1,253 @@
-import { ref, computed, PropType, defineComponent } from 'vue';
+import React, {createRef, FC, forwardRef, useState} from "react";
 
 // Utils
-import { addUnit, setScrollTop, createNamespace, pick } from '../utils';
-import { getMonthEndDay } from '../datetime-picker/utils';
+import {addUnit, setScrollTop, createNamespace, pick} from '../utils';
+import {getMonthEndDay} from '../datetime-picker/utils';
 import {
-  t,
-  bem,
-  compareDay,
-  getPrevDay,
-  getNextDay,
-  formatMonthTitle,
+	t,
+	bem,
+	compareDay,
+	getPrevDay,
+	getNextDay,
+	formatMonthTitle,
 } from './utils';
 
-// Composables
-import { useToggle } from '@vant/use';
-import { useExpose } from '../composables/use-expose';
-import { useHeight } from '../composables/use-height';
-
 // Components
-import CalendarDay, { CalendarDayItem, CalendarDayType } from './CalendarDay';
+import CalendarDay, {CalendarDayItem, CalendarDayType} from './CalendarDay';
+import {View} from "@tarojs/components";
 
 const [name] = createNamespace('calendar-month');
 
 export type CalendarType = 'single' | 'range' | 'multiple';
 
-export default defineComponent({
-  name,
 
-  props: {
-    type: String as PropType<CalendarType>,
-    color: String,
-    showMark: Boolean,
-    rowHeight: [Number, String],
-    formatter: Function as PropType<(item: CalendarDayItem) => CalendarDayItem>,
-    lazyRender: Boolean,
-    currentDate: [Date, Array] as PropType<Date | Date[]>,
-    allowSameDay: Boolean,
-    showSubtitle: Boolean,
-    showMonthTitle: Boolean,
-    firstDayOfWeek: Number,
-    date: {
-      type: Date,
-      required: true,
-    },
-    minDate: {
-      type: Date,
-      required: true,
-    },
-    maxDate: {
-      type: Date,
-      required: true,
-    },
-  },
+export interface CalendarMonthProps {
+	type: CalendarType
+	color: string
+	showMark: boolean
+	rowHeight: number | string
+	formatter: (item: CalendarDayItem) => CalendarDayItem
+	lazyRender: boolean
+	currentDate: [Date | Date[]]
+	allowSameDay: boolean
+	showSubtitle: boolean
+	showMonthTitle: boolean
+	firstDayOfWeek: number
+	date: Date
+	minDate: Date
+	maxDate: Date
+	click: (item: CalendarDayItem) => void
+	updateHeight: () => void
+}
 
-  emits: ['click', 'update-height'],
+const CalendarMonth: FC<CalendarMonthProps> = (props) => {
+	const [visible, setVisible] = useState(false);
+	const daysRef = createRef(), monthRef = createRef();
 
-  setup(props, { emit, slots }) {
-    const [visible, setVisible] = useToggle();
-    const daysRef = ref<HTMLElement>();
-    const monthRef = ref<HTMLElement>();
-    const height = useHeight(monthRef);
+	const title = function () {
+		return formatMonthTitle(props.date);
+	}();
 
-    const title = computed(() => formatMonthTitle(props.date));
-    const rowHeight = computed(() => addUnit(props.rowHeight));
-    const offset = computed(() => {
-      const realDay = props.date.getDay();
+	const rowHeight = function () {
+		return addUnit(props.rowHeight);
+	}();
 
-      if (props.firstDayOfWeek) {
-        return (realDay + 7 - props.firstDayOfWeek) % 7;
-      }
-      return realDay;
-    });
+	const offset = function () {
+		const realDay = props.date.getDay();
 
-    const totalDay = computed(() =>
-      getMonthEndDay(props.date.getFullYear(), props.date.getMonth() + 1)
-    );
+		if (props.firstDayOfWeek) {
+			return (realDay + 7 - props.firstDayOfWeek) % 7;
+		}
+		return realDay;
+	}();
 
-    const shouldRender = computed(() => visible.value || !props.lazyRender);
+	const totalDay = function () {
+		return getMonthEndDay(props.date.getFullYear(), props.date.getMonth() + 1)
+	}()
 
-    const getTitle = () => title.value;
+	const shouldRender = visible || !props.lazyRender;
 
-    const scrollIntoView = (body: Element) => {
-      const el = props.showSubtitle ? daysRef.value : monthRef.value;
+	const getTitle = () => title.value;
 
-      const scrollTop =
-        el!.getBoundingClientRect().top -
-        body.getBoundingClientRect().top +
-        body.scrollTop;
+	const scrollIntoView = (body: Element) => {
+		const el = props.showSubtitle ? daysRef.current : monthRef.current;
 
-      setScrollTop(body, scrollTop);
-    };
+		// @ts-ignore
+		const scrollTop = el!.getBoundingClientRect().top - body.getBoundingClientRect().top + body.scrollTop;
 
-    const getMultipleDayType = (day: Date) => {
-      const isSelected = (date: Date) =>
-        (props.currentDate as Date[]).some(
-          (item) => compareDay(item, date) === 0
-        );
+		setScrollTop(body, scrollTop);
+	};
 
-      if (isSelected(day)) {
-        const prevDay = getPrevDay(day);
-        const nextDay = getNextDay(day);
-        const prevSelected = isSelected(prevDay);
-        const nextSelected = isSelected(nextDay);
+	const getMultipleDayType = (day: Date) => {
+		const isSelected = (date: Date) =>
+			(props.currentDate as Date[]).some(
+				(item) => compareDay(item, date) === 0
+			);
 
-        if (prevSelected && nextSelected) {
-          return 'multiple-middle';
-        }
-        if (prevSelected) {
-          return 'end';
-        }
-        if (nextSelected) {
-          return 'start';
-        }
-        return 'multiple-selected';
-      }
+		if (isSelected(day)) {
+			const prevDay = getPrevDay(day);
+			const nextDay = getNextDay(day);
+			const prevSelected = isSelected(prevDay);
+			const nextSelected = isSelected(nextDay);
 
-      return '';
-    };
+			if (prevSelected && nextSelected) {
+				return 'multiple-middle';
+			}
+			if (prevSelected) {
+				return 'end';
+			}
+			if (nextSelected) {
+				return 'start';
+			}
+			return 'multiple-selected';
+		}
 
-    const getRangeDayType = (day: Date) => {
-      const [startDay, endDay] = props.currentDate as Date[];
+		return '';
+	};
 
-      if (!startDay) {
-        return '';
-      }
+	const getRangeDayType = (day: Date) => {
+		const [startDay, endDay] = props.currentDate as Date[];
 
-      const compareToStart = compareDay(day, startDay);
+		if (!startDay) {
+			return '';
+		}
 
-      if (!endDay) {
-        return compareToStart === 0 ? 'start' : '';
-      }
+		const compareToStart = compareDay(day, startDay);
 
-      const compareToEnd = compareDay(day, endDay);
+		if (!endDay) {
+			return compareToStart === 0 ? 'start' : '';
+		}
 
-      if (props.allowSameDay && compareToStart === 0 && compareToEnd === 0) {
-        return 'start-end';
-      }
-      if (compareToStart === 0) {
-        return 'start';
-      }
-      if (compareToEnd === 0) {
-        return 'end';
-      }
-      if (compareToStart > 0 && compareToEnd < 0) {
-        return 'middle';
-      }
+		const compareToEnd = compareDay(day, endDay);
 
-      return '';
-    };
+		if (props.allowSameDay && compareToStart === 0 && compareToEnd === 0) {
+			return 'start-end';
+		}
+		if (compareToStart === 0) {
+			return 'start';
+		}
+		if (compareToEnd === 0) {
+			return 'end';
+		}
+		if (compareToStart > 0 && compareToEnd < 0) {
+			return 'middle';
+		}
 
-    const getDayType = (day: Date): CalendarDayType => {
-      const { type, minDate, maxDate, currentDate } = props;
+		return '';
+	};
 
-      if (compareDay(day, minDate) < 0 || compareDay(day, maxDate) > 0) {
-        return 'disabled';
-      }
+	const getDayType = (day: Date): CalendarDayType => {
+		const {type, minDate, maxDate, currentDate} = props;
 
-      if (currentDate === null) {
-        return '';
-      }
+		if (compareDay(day, minDate) < 0 || compareDay(day, maxDate) > 0) {
+			return 'disabled';
+		}
 
-      if (Array.isArray(currentDate)) {
-        if (type === 'multiple') {
-          return getMultipleDayType(day);
-        }
-        if (type === 'range') {
-          return getRangeDayType(day);
-        }
-      } else if (type === 'single') {
-        return compareDay(day, currentDate as Date) === 0 ? 'selected' : '';
-      }
+		if (currentDate === null) {
+			return '';
+		}
 
-      return '';
-    };
+		if (Array.isArray(currentDate)) {
+			if (type === 'multiple') {
+				return getMultipleDayType(day);
+			}
+			if (type === 'range') {
+				return getRangeDayType(day);
+			}
+		} else if (type === 'single') {
+			return compareDay(day, currentDate as Date) === 0 ? 'selected' : '';
+		}
 
-    const getBottomInfo = (dayType: CalendarDayType) => {
-      if (props.type === 'range') {
-        if (dayType === 'start' || dayType === 'end') {
-          return t(dayType);
-        }
-        if (dayType === 'start-end') {
-          return t('startEnd');
-        }
-      }
-    };
+		return '';
+	};
 
-    const renderTitle = () => {
-      if (props.showMonthTitle) {
-        return <div class={bem('month-title')}>{title.value}</div>;
-      }
-    };
+	const getBottomInfo = (dayType: CalendarDayType) => {
+		if (props.type === 'range') {
+			if (dayType === 'start' || dayType === 'end') {
+				return t(dayType);
+			}
+			if (dayType === 'start-end') {
+				return t('startEnd');
+			}
+		}
+	};
 
-    const renderMark = () => {
-      if (props.showMark && shouldRender.value) {
-        return <div class={bem('month-mark')}>{props.date.getMonth() + 1}</div>;
-      }
-    };
+	const renderTitle = () => {
+		if (props.showMonthTitle) {
+			return <View className={`${bem('month-title')}`}>{title.value}</View>;
+		}
+	};
 
-    const placeholders = computed<CalendarDayItem[]>(() => {
-      const count = Math.ceil((totalDay.value + offset.value) / 7);
-      return Array(count).fill({ type: 'placeholder' });
-    });
+	const renderMark = () => {
+		if (props.showMark && shouldRender) {
+			return <View className={`${bem('month-mark')}`}>{props.date.getMonth() + 1}</View>;
+		}
+	};
 
-    const days = computed(() => {
-      const days: CalendarDayItem[] = [];
-      const year = props.date.getFullYear();
-      const month = props.date.getMonth();
+	const placeholders = function () {
+		const count = Math.ceil((totalDay + offset) / 7);
+		return Array(count).fill({type: 'placeholder'});
+	}();
 
-      for (let day = 1; day <= totalDay.value; day++) {
-        const date = new Date(year, month, day);
-        const type = getDayType(date);
+	const days = function () {
+		const days: CalendarDayItem[] = [];
+		const year = props.date.getFullYear();
+		const month = props.date.getMonth();
 
-        let config: CalendarDayItem = {
-          date,
-          type,
-          text: day,
-          bottomInfo: getBottomInfo(type),
-        };
+		for (let day = 1; day <= totalDay; day++) {
+			const date = new Date(year, month, day);
+			const type = getDayType(date);
 
-        if (props.formatter) {
-          config = props.formatter(config);
-        }
+			let config: CalendarDayItem = {
+				date,
+				type,
+				text: day,
+				bottomInfo: getBottomInfo(type),
+			};
 
-        days.push(config);
-      }
+			if (props.formatter) {
+				config = props.formatter(config);
+			}
 
-      return days;
-    });
+			days.push(config);
+		}
 
-    const renderDay = (item: CalendarDayItem, index: number) => (
-      <CalendarDay
-        v-slots={pick(slots, ['top-info', 'bottom-info'])}
-        item={item}
-        index={index}
-        color={props.color}
-        offset={offset.value}
-        rowHeight={rowHeight.value}
-        onClick={(item) => emit('click', item)}
-      />
-    );
+		return days;
+	}();
 
-    const renderDays = () => {
-      return (
-        <div ref={daysRef} role="grid" class={bem('days')}>
-          {renderMark()}
-          {(shouldRender.value ? days : placeholders).value.map(renderDay)}
-        </div>
-      );
-    };
+	const renderDay = (item: CalendarDayItem, index: number) => (
+		<CalendarDay
+			// v-slots={pick(slots, ['top-info', 'bottom-info'])}
+			item={item}
+			index={index}
+			color={props.color}
+			offset={offset}
+			rowHeight={rowHeight}
+			click={(item) => props.click(item)}
+		/>
+	);
 
-    useExpose({
-      getTitle,
-      getHeight: () => height.value,
-      setVisible,
-      scrollIntoView,
-    });
+	const RenderDays = forwardRef((props, ref) => (
+		<View ref={ref} className={`${bem('days')}`} {...props}>
+			{renderMark()}
+			{(shouldRender ? days : placeholders).map(renderDay)}
+		</View>
+	))
 
-    return () => (
-      <div class={bem('month')} ref={monthRef}>
-        {renderTitle()}
-        {renderDays()}
-      </div>
-    );
-  },
-});
+	const RenderMonth = forwardRef((props, ref) => (
+		<View ref={ref} className={`${bem('month')}`} {...props}>
+			{renderTitle()}
+			<RenderDays ref={daysRef}/>
+			{/*{renderDays()}*/}
+		</View>
+	));
+
+	return <RenderMonth ref={monthRef}/>
+}
+
+
+CalendarMonth.displayName
+CalendarMonth.defaultProps = {}
+
+export {CalendarMonth};
+export default CalendarMonth;

@@ -1,33 +1,35 @@
-import { PropType, CSSProperties, TeleportProps } from 'vue';
-import { truthProp, unknownProp } from '../utils';
+// import { PropType, CSSProperties, TeleportProps } from 'vue';
+// import { truthProp, unknownProp } from '../utils';
 
-export const popupSharedProps = {
-  // whether to show popup
-  show: Boolean,
-  // z-index
-  zIndex: [Number, String],
-  // whether to show overlay
-  overlay: truthProp,
-  // transition duration
-  duration: [Number, String],
-  // teleport
-  teleport: [String, Object] as PropType<TeleportProps['to']>,
-  // prevent body scroll
-  lockScroll: truthProp,
-  // whether to lazy render
-  lazyRender: truthProp,
-  // overlay custom style
-  overlayStyle: Object as PropType<CSSProperties>,
-  // overlay custom class name
-  overlayClass: unknownProp,
-  // Initial rendering animation
-  transitionAppear: Boolean,
-  // whether to close popup when overlay is clicked
-  closeOnClickOverlay: truthProp,
+import {CSSProperties} from "react";
+
+export interface popupSharedProps {
+	// whether to show popup
+	show: boolean
+	// z-index
+	zIndex: number
+	// whether to show overlay
+	overlay: boolean
+	// transition duration
+	duration: number
+	// teleport
+	// teleport: [String, Object] as PropType<TeleportProps['to']>,
+	// prevent body scroll
+	lockScroll: boolean
+	// whether to lazy render
+	lazyRender: boolean
+	// overlay custom style
+	overlayStyle: CSSProperties,
+	// overlay custom class name
+	overlayClass: string
+	// Initial rendering animation
+	transitionAppear: boolean
+	// whether to close popup when overlay is clicked
+	closeOnClickOverlay: boolean
 };
 
-export type PopupSharedPropKeys = Array<keyof typeof popupSharedProps>;
-
-export const popupSharedPropKeys = Object.keys(
-  popupSharedProps
-) as PopupSharedPropKeys;
+// export type PopupSharedPropKeys = Array<keyof typeof popupSharedProps>;
+//
+// export const popupSharedPropKeys = Object.keys(
+//   popupSharedProps
+// ) as PopupSharedPropKeys;
