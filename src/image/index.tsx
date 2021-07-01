@@ -5,8 +5,7 @@ import {isDef, addUnit, inBrowser, createNamespace, isReactElement} from '../uti
 import {Icon} from '../icon';
 import {View, Image as TaroImage, ITouchEvent, BaseEventOrig} from "@tarojs/components";
 import {ImageProps as TaroJsImageProps} from "@tarojs/components/types/Image";
-import onLoadEventDetail = TaroJsImageProps.onLoadEventDetail;
-import onErrorEventDetail = TaroJsImageProps.onErrorEventDetail;
+
 
 const [name, bem] = createNamespace('image');
 
@@ -28,8 +27,8 @@ export interface ImageProps {
 	errorIcon?: string | ReactElement
 	loadingIcon?: string | ReactElement
 	click?: (e: ITouchEvent) => void
-	load?: (event: BaseEventOrig<onLoadEventDetail>) => void
-	error?: (event: BaseEventOrig<onErrorEventDetail>) => void
+	load?: (event: BaseEventOrig<TaroJsImageProps.onLoadEventDetail>) => void
+	error?: (event: BaseEventOrig<TaroJsImageProps.onErrorEventDetail>) => void
 }
 
 const Image: FC<ImageProps> = (props) => {
@@ -49,13 +48,13 @@ const Image: FC<ImageProps> = (props) => {
 		style.borderRadius = addUnit(props.radius);
 	}
 
-	const onLoad = (event: BaseEventOrig<onLoadEventDetail>) => {
+	const onLoad = (event: BaseEventOrig<TaroJsImageProps.onLoadEventDetail>) => {
 		changeLoading(false);
 		changeError(false);
 		props.load?.(event)
 	};
 
-	const onError = (event: BaseEventOrig<onErrorEventDetail>) => {
+	const onError = (event: BaseEventOrig<TaroJsImageProps.onErrorEventDetail>) => {
 		changeLoading(false);
 		changeError(true);
 		props.error?.(event)

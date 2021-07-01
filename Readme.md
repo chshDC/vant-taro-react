@@ -35,7 +35,7 @@ const App = () => {
 - [x] Cell
 - [x] Icon
 - [x] Image
-- [ ] Layout
+- [x] Layout
 - [ ] Popup
 - [ ] Built-in style
 - [ ] Toast

@@ -12,7 +12,7 @@ import CellGroup from './cell-group';
 // import Checkbox from './checkbox';
 // import CheckboxGroup from './checkbox-group';
 // import Circle from './circle';
-// import Col from './col';
+import Col from './col';
 // import Collapse from './collapse';
 // import CollapseItem from './collapse-item';
 // import ContactCard from './contact-card';
@@ -61,7 +61,7 @@ import Loading from './loading';
 // import Radio from './radio';
 // import RadioGroup from './radio-group';
 // import Rate from './rate';
-// import Row from './row';
+import Row from './row';
 // import Search from './search';
 // import ShareSheet from './share-sheet';
 // import Sidebar from './sidebar';
@@ -104,7 +104,7 @@ var version = '2.12.22';
 //     install(window.Vue);
 // }
 
-export {version, Loading, Badge, Icon, Button, Cell, CellGroup, Image};
+export {version, Loading, Badge, Icon, Button, Cell, CellGroup, Image, Row, Col};
 // export { install, version, ActionSheet, AddressEdit, AddressList, Area, Badge, Button, Calendar, Card, Cascader, Cell, CellGroup, Checkbox, CheckboxGroup, Circle, Col, Collapse, CollapseItem, ContactCard, ContactEdit, ContactList, CountDown, Coupon, CouponCell, CouponList, DatetimePicker, Dialog, Divider, DropdownItem, DropdownMenu, Empty, Field, Form, GoodsAction, GoodsActionButton, GoodsActionIcon, Grid, GridItem, Icon, Image, ImagePreview, IndexAnchor, IndexBar, Info, Lazyload, List, Loading, Locale, NavBar, NoticeBar, Notify, NumberKeyboard, Overlay, Pagination, Panel, PasswordInput, Picker, Popover, Popup, Progress, PullRefresh, Radio, RadioGroup, Rate, Row, Search, ShareSheet, Sidebar, SidebarItem, Skeleton, Sku, Slider, Step, Stepper, Steps, Sticky, SubmitBar, Swipe, SwipeCell, SwipeItem, Switch, SwitchCell, Tab, Tabbar, TabbarItem, Tabs, Tag, Toast, TreeSelect, Uploader };
 export default {
 	version: version
