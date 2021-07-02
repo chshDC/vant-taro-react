@@ -33,8 +33,8 @@ import CountDown from './count-down';
 // import GoodsAction from './goods-action';
 // import GoodsActionButton from './goods-action-button';
 // import GoodsActionIcon from './goods-action-icon';
-// import Grid from './grid';
-// import GridItem from './grid-item';
+import Grid from './grid';
+import GridItem from './grid-item';
 import Icon from './icon';
 import Image from './image';
 // import ImagePreview from './image-preview';
@@ -104,7 +104,7 @@ var version = '2.12.22';
 //     install(window.Vue);
 // }
 
-export {version, Loading, Badge, Icon, Button, Cell, CellGroup, Image, Row, Col, Popup, CountDown};
+export {version, Loading, Badge, Icon, Button, Cell, CellGroup, Image, Row, Col, Popup, CountDown, Grid, GridItem};
 // export { install, version, ActionSheet, AddressEdit, AddressList, Area, Badge, Button, Calendar, Card, Cascader, Cell, CellGroup, Checkbox, CheckboxGroup, Circle, Col, Collapse, CollapseItem, ContactCard, ContactEdit, ContactList, CountDown, Coupon, CouponCell, CouponList, DatetimePicker, Dialog, Divider, DropdownItem, DropdownMenu, Empty, Field, Form, GoodsAction, GoodsActionButton, GoodsActionIcon, Grid, GridItem, Icon, Image, ImagePreview, IndexAnchor, IndexBar, Info, Lazyload, List, Loading, Locale, NavBar, NoticeBar, Notify, NumberKeyboard, Overlay, Pagination, Panel, PasswordInput, Picker, Popover, Popup, Progress, PullRefresh, Radio, RadioGroup, Rate, Row, Search, ShareSheet, Sidebar, SidebarItem, Skeleton, Sku, Slider, Step, Stepper, Steps, Sticky, SubmitBar, Swipe, SwipeCell, SwipeItem, Switch, SwitchCell, Tab, Tabbar, TabbarItem, Tabs, Tag, Toast, TreeSelect, Uploader };
 export default {
 	version: version

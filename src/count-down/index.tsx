@@ -117,5 +117,5 @@ CountDown.defaultProps = {
 	format: "HH:mm:ss"
 }
 
-// export {CountDown}
+export {CountDown}
 export default CountDown;

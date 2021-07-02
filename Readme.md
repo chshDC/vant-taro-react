@@ -73,10 +73,10 @@ const App = () => {
 
 ### Display Components
 
-- [ ] Badge
+- [x] Badge
 - [ ] Circle
 - [ ] Collapse
-- [ ] CountDown
+- [x] CountDown
 - [ ] Divider
 - [ ] Empty
 - [ ] ImagePreview
@@ -93,7 +93,7 @@ const App = () => {
 
 ### Navigation Components
 
-- [ ] Grid
+- [x] Grid
 - [ ] IndexBar
 - [ ] NavBar
 - [ ] Pagination
